@@ -1,4 +1,5 @@
 import { useContext } from "react";
+import { Link } from "react-router-dom";
 import { AuthContext } from "../providers/AuthProvider";
 
 const Home = () => {
@@ -10,6 +11,9 @@ const Home = () => {
       {JSON.stringify(auth)}
       <p onClick = {auth.handleLogin}>Login</p>
       <p onClick = {auth.handleLogout}>Logout</p>
+      <Link to ="/protected">Protected</Link>
+      <Link to ="/public">Public</Link>
+
     </div>
   )
 }
