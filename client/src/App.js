@@ -6,6 +6,7 @@ import Public from './pages/Public';
 import Protected from './pages/Protected';
 import Layout from './pages/Layout';
 import RequireAuth from './components/RequireAuth';
+import Register from './pages/Register';
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
         {/* {public routes go here} */}
         <Route path='/' element={<Home />} />
         <Route path='/public' element={<Public />} />
+        <Route path='/register' element={<Register />} />
         <Route element={<RequireAuth />}>
           {/* protected routes go here */}
           <Route path='/protected' element={<Protected />} />
