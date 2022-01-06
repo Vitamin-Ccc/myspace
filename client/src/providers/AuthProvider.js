@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import axios from "axios";
 
 export const AuthContext = React.createContext();
@@ -13,13 +13,13 @@ const AuthProvider = (props) => {
   const handleRegister = async (user, navigate) => {
     //axios call to register users (interacting with DB)
     try {
-    let res = await axios.post("api/auth", user);
-    // console.log("res:", user);
-    setUser(res.data.data);
-    navigate("/protected")
-    // navigate to a certain page
+      let res = await axios.post("api/auth", user);
+      // console.log("res:", user);
+      setUser(res.data.data);
+      navigate("/protected")
+      // navigate to a certain page
 
-    } catch(err){
+    } catch (err) {
       console.log(err.response);
       alert("error occurred registering user")
     }
@@ -27,31 +27,38 @@ const AuthProvider = (props) => {
 
   const handleLogin = async (user, navigate) => {
     //axios call to login users (interacting with DB)
-    try{
+    try {
       let res = await axios.post("api/auth/sign_in", user);
       setUser(res.data.data);
       navigate("/protected")
-    } catch(err){
+    } catch (err) {
       console.log(err.response);
       alert("error occurred registering user")
     }
   };
 
-  const handleLogout = async () => {
+  const handleLogout = async (navigate) => {
     //axios call to logout users (interacting with DB)
-    setUser(null);
-    console.log("handleLogout")
+    try {
+      let res = await axios.delete("api/auth/sign_out");
+      console.log(res);
+      setUser(null);
+      navigate("/login")
+    } catch (err) {
+      console.log(err.response);
+      alert("error occurred registering user")
+    }
   };
 
   return (
-    <AuthContext.Provider value = {{
-      ...user, 
+    <AuthContext.Provider value={{
+      ...user,
       handleRegister,
       handleLogin,
       handleLogout,
       setUser,
       authenticated: user !== null,
-      }}
+    }}
     >
       {props.children}
     </AuthContext.Provider>

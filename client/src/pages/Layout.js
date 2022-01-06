@@ -1,12 +1,13 @@
 import { useContext } from "react"
-import { Link, Outlet } from "react-router-dom"
+import { Link, Outlet, useNavigate } from "react-router-dom"
 import { AuthContext } from "../providers/AuthProvider"
 
 const Layout = () => {
-  const { authenticated } = useContext(AuthContext);
+  let nav = useNavigate();
+  const { authenticated, handleLogout } = useContext(AuthContext);
   const renderAuthLinks = () => {
-    if(authenticated){
-      return <div>Logout</div>
+    if (authenticated) {
+      return <button onClick={() => handleLogout(nav)}>Logout</button>
     }
     return (
       <>
