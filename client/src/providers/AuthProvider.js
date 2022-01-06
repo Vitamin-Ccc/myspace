@@ -33,7 +33,7 @@ const AuthProvider = (props) => {
       navigate("/protected")
     } catch (err) {
       console.log(err.response);
-      alert("error occurred registering user")
+      alert("error occurred logging in user")
     }
   };
 
@@ -46,7 +46,7 @@ const AuthProvider = (props) => {
       navigate("/login")
     } catch (err) {
       console.log(err.response);
-      alert("error occurred registering user")
+      alert("error occurred logging out user")
     }
   };
 
