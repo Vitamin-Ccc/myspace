@@ -1,6 +1,24 @@
+import { useContext } from "react"
 import { Link, Outlet } from "react-router-dom"
+import { AuthContext } from "../providers/AuthProvider"
 
 const Layout = () => {
+  const { authenticated } = useContext(AuthContext);
+  const renderAuthLinks = () => {
+    if(authenticated){
+      return <div>Logout</div>
+    }
+    return (
+      <>
+        <div>
+          <Link to='/register'>Register</Link>
+        </div>
+        <div>
+          <Link to='/login'>Login</Link>
+        </div>
+      </>
+    )
+  }
   return (
     <div>
       <div style={styles.navbar}>
@@ -13,12 +31,7 @@ const Layout = () => {
         <div>
           <Link to='/protected'>Protected</Link>
         </div>
-        <div>
-          <Link to='/register'>Register</Link>
-        </div>
-        <div>
-          <Link to='/login'>Login</Link>
-        </div>
+        {renderAuthLinks()}
       </div>
       <div style={styles.pageContainer}>
         <Outlet />

@@ -1,7 +1,9 @@
 import { useContext, useState } from "react";
+import { useNavigate } from "react-router";
 import { AuthContext } from "../providers/AuthProvider";
 
 const Register = () => {
+  const navigate = useNavigate();
   const {handleRegister} = useContext(AuthContext);
   const [email, setEmail] = useState("testing@test.com")
   const [password, setPassword] = useState("123456")
@@ -16,7 +18,7 @@ const Register = () => {
       return;
     }
     // console.log({ email, password });
-    handleRegister({ email, password });
+    handleRegister({ email, password }, navigate);
   }
   return (
     <div>

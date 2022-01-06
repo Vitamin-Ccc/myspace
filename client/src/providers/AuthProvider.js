@@ -10,26 +10,31 @@ const AuthProvider = (props) => {
   //a null user is a user that is not logged in
   const [user, setUser] = useState(null);
 
-  const handleRegister = async (user) => {
+  const handleRegister = async (user, navigate) => {
     //axios call to register users (interacting with DB)
     try {
     let res = await axios.post("api/auth", user);
     // console.log("res:", user);
     setUser(res.data.data);
+    navigate("/protected")
     // navigate to a certain page
 
     } catch(err){
       console.log(err.response);
       alert("error occurred registering user")
     }
-    //setUser
   };
 
-  const handleLogin = async () => {
+  const handleLogin = async (user, navigate) => {
     //axios call to login users (interacting with DB)
-    //setUser
-    setUser ({ email: "some email"})
-    console.log("handleLogin")
+    try{
+      let res = await axios.post("api/auth/sign_in", user);
+      setUser(res.data.data);
+      navigate("/protected")
+    } catch(err){
+      console.log(err.response);
+      alert("error occurred registering user")
+    }
   };
 
   const handleLogout = async () => {
