@@ -9,8 +9,6 @@ const Home = () => {
     <div>
       <h1>Home</h1>
       {JSON.stringify(auth)}
-      <p onClick = {auth.handleLogin}>Login</p>
-      <p onClick = {auth.handleLogout}>Logout</p>
       <Link to ="/protected">Protected</Link>
       <Link to ="/public">Public</Link>
       <p onClick = {()=>navigate('/public')}>navigate to public</p>
